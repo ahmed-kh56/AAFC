@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>استبيان المقاسات</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      direction: rtl;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<form id="surveyForm">
+  <h2>استبيان سريع عن تجربة شراء الملابس أونلاين</h2>
+
+  <label>الجنس:</label>
+  <select name="gender" required>
+    <option disabled selected>اختر</option>
+    <option>ذكر</option>
+    <option>أنثى</option>
+  </select>
+
+  <label>هل اشتريت ملابس أونلاين من قبل؟</label>
+  <select name="boughtBefore">
+    <option>نعم</option>
+    <option>لا</option>
+  </select>
+
+  <label>هل سبق ورجعت ملابس؟</label>
+  <select name="returnedBefore">
+    <option>نعم</option>
+    <option>لا</option>
+  </select>
+
+  <label>لو نعم، ما سبب الإرجاع؟</label>
+  <input type="text" name="returnReason" placeholder="مثلاً: المقاس، الخامة...">
+
+  <label>كم مرة رجعت لبس بسبب المقاس في اخر 10 مرات تشتري لبس اونلاين؟</label>
+  <select name="returnCount">
+    <option>ولا مرة</option>
+    <option>مرة واحدة</option>
+    <option>2–3 مرات</option>
+    <option>أكتر من 3 مرات</option>
+  </select>
+
+  <label>هل بتواجه صعوبة في اختيار المقاس؟</label>
+  <select name="difficulty">
+    <option>دايمًا</option>
+    <option>أحيانًا</option>
+    <option>نادرًا</option>
+    <option>لا أبدًا</option>
+  </select>
+
+  <button type="submit">إرسال</button>
+</form>
+
+<script>
+  document.getElementById("surveyForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const form = e.target;
+    const data = {
+      gender: form.gender.value,
+      boughtBefore: form.boughtBefore.value,
+      returnedBefore: form.returnedBefore.value,
+      returnReason: form.returnReason.value,
+      returnCount: form.returnCount.value,
+      difficulty: form.difficulty.value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbyX-G1OSra6IOzUt-2m8qW9Ff68y3R7fFpD5MW4XQWNenfQ1nK9PkKSkpLY5DAlMfyxmg/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    alert("شكراً لمشاركتك ❤️");
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
